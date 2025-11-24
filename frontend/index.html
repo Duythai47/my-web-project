@@ -70,11 +70,10 @@
         <h1>Frontend HTML</h1>
         <p>Giao diện này được deploy tự động từ GitHub.</p>
 
-        <?php
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $time = date('H:i:s d/m/Y');
-        echo "<div class='badge'>Server Time: $time</div>";
-        ?>
+        <div class="time-box">
+            Lần cập nhật cuối cùng:<br>
+            <strong style="font-size: 1.2em; color: #d63031;">{{UPDATE_TIME}}</strong>
+        </div>
     </div>
 
 </body>
