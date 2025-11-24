@@ -13,11 +13,6 @@ jobs:
       
       - name: Ghi gio cap nhat vao HTML
         run: |
-          # 1. Lấy giờ hiện tại (UTC) cộng thêm 7 tiếng ra giờ VN
-          CURRENT_TIME=$(date -d "+7 hours" +'%H:%M:%S %d/%m/%Y')
-          
-          # 2. Dùng lệnh sed để tìm và thay thế chữ {{UPDATE_TIME}} bằng giờ thật
-          sed -i "s|{{UPDATE_TIME}}|$CURRENT_TIME|g" frontend/index.html
           
       - name: Day code len Hosting (FTP)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4

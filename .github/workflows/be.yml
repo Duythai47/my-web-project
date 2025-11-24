@@ -2,7 +2,7 @@ name: Deploy Backend
 on:
   push:
     branches: [ "main" ]
-    paths: [ "backend/**" ] # Chỉ chạy khi file trong thư mục backend thay đổi
+    paths: [ "backend/**" ]
 
 jobs:
   deploy-be:
@@ -18,4 +18,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./backend/
-          server-dir: /htdocs/api/ # Backend sẽ nằm trong thư mục 'api'
+          server-dir: /htdocs/api/
