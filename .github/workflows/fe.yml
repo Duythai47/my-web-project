@@ -1,0 +1,21 @@
+name: Deploy Frontend
+on:
+  push:
+    branches: [ "main" ]
+    paths: [ "frontend/**" ] # Chỉ chạy khi file trong thư mục frontend thay đổi
+
+jobs:
+  deploy-fe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lay code tu GitHub
+        uses: actions/checkout@v4
+      
+      - name: Day code len Hosting
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./frontend/
+          server-dir: /htdocs/ # Frontend nằm ngay trang chủ
