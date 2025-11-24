@@ -2,7 +2,7 @@ name: Deploy Frontend
 on:
   push:
     branches: [ "main" ]
-    paths: [ "frontend/**" ] # Chỉ chạy khi file trong thư mục frontend thay đổi
+    paths: [ "frontend/**" ]
 
 jobs:
   deploy-fe:
@@ -11,11 +11,19 @@ jobs:
       - name: Lay code tu GitHub
         uses: actions/checkout@v4
       
-      - name: Day code len Hosting
+      - name: Ghi gio cap nhat vao HTML
+        run: |
+          # 1. Lấy giờ hiện tại (UTC) cộng thêm 7 tiếng ra giờ VN
+          CURRENT_TIME=$(date -d "+7 hours" +'%H:%M:%S %d/%m/%Y')
+          
+          # 2. Dùng lệnh sed để tìm và thay thế chữ {{UPDATE_TIME}} bằng giờ thật
+          sed -i "s|{{UPDATE_TIME}}|$CURRENT_TIME|g" frontend/index.html
+          
+      - name: Day code len Hosting (FTP)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./frontend/
-          server-dir: /htdocs/ # Frontend nằm ngay trang chủ
+          server-dir: /htdocs/
